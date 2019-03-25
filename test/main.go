@@ -19,7 +19,7 @@ func main() {
 	}
 
 	for {
-		inst, err := balance.Random(insts)
+		inst, err := balance.Round(insts)
 		if err != nil {
 			fmt.Println("do balance err")
 			time.Sleep(time.Second)

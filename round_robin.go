@@ -2,31 +2,30 @@ package balance
 
 import (
 	"errors"
-	"github.com/bincent/balance"
+	"net"
+	"strconv"
 )
 
 func init() {
-	manager := balance.Manager{}
-	manager.Register("RoundRobin", &RoundRobin{})
+	manager.register("RoundRobin", &RoundRobin{})
 }
 
 // 轮询调度算法
 type RoundRobin struct {
-	curIndex int
+	index int
 }
 
-func (this *RoundRobin) Execute(insts [] *balance.Instance, key ...string) (inst *balance.Instance, err error) {
-	if len(insts) == 0 {
-		err = errors.New("no instance")
-		return
-	}
-
+func (this *RoundRobin) Execute(insts [] *Instance, key ...string) (address string, err error) {
 	lens := len(insts)
-	if this.curIndex >= lens {
-		this.curIndex = 0
-	}
-	inst = insts[this.curIndex]
-	this.curIndex++
-	return
 
+	if lens == 0 {
+		return "", errors.New("no instance")
+	}
+
+	if this.index >= lens { this.index = 0 }
+
+	inst := insts[this.index]
+	this.index++
+
+	return net.JoinHostPort(inst.host, strconv.Itoa(inst.port)), nil
 }

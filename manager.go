@@ -10,39 +10,35 @@ var manager = Manager{
 	allBalance: make(map[string]Balance),
 }
 
-func Random(insts []*Instance) (inst *Instance, err error)  {
+// 随机策略
+func Random(insts []*Instance) (address string, err error)  {
 	return manager.execute("RandomRule", insts)
 }
 
-func  Round(insts []*Instance) (inst *Instance, err error)  {
+// 轮询调度算法
+func Round(insts []*Instance) (address string, err error)  {
 	return manager.execute("RoundRobin", insts)
 }
 
-func Weighted(insts []*Instance) (inst *Instance, err error)  {
+// 加权策略
+func Weighted(insts []*Instance) (address string, err error)  {
 	return manager.execute("WeightedResponseTimeRule", insts)
 }
 
-func BestAvailable(insts []*Instance) (inst *Instance, err error)  {
+// 请求数最少策略
+func BestAvailable(insts []*Instance) (address string, err error)  {
 	return manager.execute("BestAvailableRule", insts)
 }
 
-func (this *Manager) Register(name string, balance Balance) {
+func (this *Manager) register(name string, balance Balance) {
 	this.allBalance[name] = balance
 }
 
-func (this *Manager) execute(name string, insts []*Instance) (inst *Instance, err error) {
+func (this *Manager) execute(name string, insts []*Instance) (address string, err error) {
 	balance, ok := manager.allBalance[name]
 	if !ok {
-		err = fmt.Errorf("not fount %s", name)
-		fmt.Println("not found ",name)
-		return
+		return  "", fmt.Errorf("not fount %s", name)
 	}
 
-	inst, err = balance.Execute(insts)
-	if err != nil {
-		err = fmt.Errorf(" %s erros", name)
-		return
-	}
-
-	return
+	return balance.Execute(insts)
 }

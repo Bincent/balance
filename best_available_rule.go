@@ -2,29 +2,27 @@ package balance
 
 import (
 	"errors"
-	"github.com/bincent/balance"
 	"math/rand"
+	"net"
+	"strconv"
 )
 
 func init() {
-	manager := balance.Manager{}
-	manager.Register("BestAvailableRule", &BestAvailableRule{})
+	manager.register("BestAvailableRule", &BestAvailableRule{})
 }
 
 type BestAvailableRule struct {
 
 }
 
-func (this *BestAvailableRule) Execute(insts [] *balance.Instance,key...string) (inst *balance.Instance, err error) {
-	if len(insts) == 0 {
-		err = errors.New("no instance")
-		return
+func (this *BestAvailableRule) Execute(insts [] *Instance,key...string) (address string, err error) {
+	lens := len(insts)
+	if lens == 0 {
+		return "", errors.New("no instance")
 	}
 
-	lens := len(insts)
-
 	index := rand.Intn(lens)
-	inst = insts[index]
+	inst := insts[index]
 
-	return
+	return net.JoinHostPort(inst.host, strconv.Itoa(inst.port)), nil
 }

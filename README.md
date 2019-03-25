@@ -3,7 +3,7 @@
 #### 介绍
 安装
 ```shell
-go get github.com/bincent/balance
+go get -u -v github.com/bincent/balance
 ```
 
 使用示例
@@ -24,10 +24,10 @@ inst, err := balance.Random(insts)
 // RoundRobin表示轮询策略
 inst, err := balance.Round(insts)
 
-//WeightedResponseTimeRule表示加权策略
+//WeightedResponseTimeRule加权策略
 inst, err := balance.Weighted(insts)
 
-//BestAvailableRule表示请求数最少策略
+//BestAvailableRule请求数最少策略
 inst, err := balance.BestAvailable(insts)
 
 ```
