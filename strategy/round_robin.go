@@ -1,9 +1,12 @@
-package balance
+package strategy
 
-import "errors"
+import (
+	"errors"
+	"reepu.com/balance"
+)
 
 func init() {
-	manager.register("round", &RoundRobin{})
+	balance.manager.register("RoundRobin", &RoundRobin{})
 }
 
 // 轮询调度算法

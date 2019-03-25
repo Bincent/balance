@@ -11,11 +11,19 @@ var manager = Manager{
 }
 
 func Random(insts []*Instance) (inst *Instance, err error)  {
-	return manager.execute("random", insts)
+	return manager.execute("RandomRule", insts)
 }
 
 func  Round(insts []*Instance) (inst *Instance, err error)  {
-	return manager.execute("round", insts)
+	return manager.execute("RoundRobin", insts)
+}
+
+func Weighted(insts []*Instance) (inst *Instance, err error)  {
+	return manager.execute("WeightedResponseTimeRule", insts)
+}
+
+func BestAvailable(insts []*Instance) (inst *Instance, err error)  {
+	return manager.execute("BestAvailableRule", insts)
 }
 
 func (this *Manager) register(name string, balance Balance) {

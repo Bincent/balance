@@ -1,12 +1,13 @@
-package balance
+package strategy
 
 import (
 	"errors"
 	"math/rand"
+	"reepu.com/balance"
 )
 
 func init()  {
-	manager.register("random", &RandomRule{})
+	balance.manager.register("RandomRule", &RandomRule{})
 }
 
 // 随机策略
