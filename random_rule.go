@@ -1,20 +1,21 @@
-package strategy
+package balance
 
 import (
 	"errors"
+	"github.com/bincent/balance"
 	"math/rand"
-	"reepu.com/balance"
 )
 
 func init()  {
-	balance.manager.register("RandomRule", &RandomRule{})
+	manager := balance.Manager{}
+	manager.Register("RandomRule", &RandomRule{})
 }
 
 // 随机策略
 type RandomRule struct {
 }
 
-func (this *RandomRule) Execute(insts [] *Instance,key...string) (inst *Instance, err error) {
+func (this *RandomRule) Execute(insts [] *balance.Instance,key...string) (inst *balance.Instance, err error) {
 	if len(insts) == 0 {
 		err = errors.New("no instance")
 		return

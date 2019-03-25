@@ -26,7 +26,7 @@ func BestAvailable(insts []*Instance) (inst *Instance, err error)  {
 	return manager.execute("BestAvailableRule", insts)
 }
 
-func (this *Manager) register(name string, balance Balance) {
+func (this *Manager) Register(name string, balance Balance) {
 	this.allBalance[name] = balance
 }
 

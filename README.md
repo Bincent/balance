@@ -1,6 +1,12 @@
 # Balance
 
 #### 介绍
+安装
+```shell
+go get github.com/bincent/balance
+```
+
+使用示例
 
 ```go
 // 预置数组

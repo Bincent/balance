@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/bincent/balance"
 	"math/rand"
-	"reepu.com/balance"
 	"strconv"
 	"time"
 )
