@@ -20,16 +20,6 @@ func Round(insts []*Instance) (address string, err error)  {
 	return manager.execute("RoundRobin", insts)
 }
 
-// 加权策略
-func Weighted(insts []*Instance) (address string, err error)  {
-	return manager.execute("WeightedResponseTimeRule", insts)
-}
-
-// 请求数最少策略
-func BestAvailable(insts []*Instance) (address string, err error)  {
-	return manager.execute("BestAvailableRule", insts)
-}
-
 func (this *Manager) register(name string, balance Balance) {
 	this.allBalance[name] = balance
 }

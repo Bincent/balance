@@ -23,11 +23,4 @@ inst, err := balance.Random(insts)
 
 // RoundRobin表示轮询策略
 inst, err := balance.Round(insts)
-
-//WeightedResponseTimeRule加权策略
-inst, err := balance.Weighted(insts)
-
-//BestAvailableRule请求数最少策略
-inst, err := balance.BestAvailable(insts)
-
 ```
